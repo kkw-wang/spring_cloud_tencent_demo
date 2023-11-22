@@ -1,0 +1,15 @@
+global:
+  statReporter:
+    #描述: 是否启用上报
+    enable: true
+    plugin:
+      prometheus:
+        #描述: 设置 prometheus 指标上报模式
+        #类型:string
+        #默认值:pull
+        #范围:pull|push
+        type: push
+# 被调方配置
+provider:
+    # 是否上报限流监控视图, 该开关默认关闭，如果需要使用限流的老监控视图，则需要开启此监控数据上报开关
+    reportMetrics: true

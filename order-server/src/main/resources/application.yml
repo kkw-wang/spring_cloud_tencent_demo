@@ -1,0 +1,13 @@
+server:
+  port: 9000
+# 应用名称
+spring:
+  config:
+    import: polaris
+  cloud:
+    openfeign:
+      compression:
+        request:
+          enabled: true
+          min-request-size: 10
+  

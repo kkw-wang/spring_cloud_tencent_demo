@@ -1,0 +1,27 @@
+# 具体文档参考：https://github.com/Tencent/spring-cloud-tencent/wiki/%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83
+# 配置中心模块，需要使用bootstrap.yml文件，同时2021后的spring cloud需要引入spring-cloud-starter-bootstrap依赖
+
+spring:
+  application:
+    name: order-server
+  cloud:
+    polaris:
+      address: grpc://119.91.66.223:8091 # 必填
+      namespace: default # 全局 namespace 参数
+      stat:
+        pushgateway:
+          enabled: true # 开启监控数据推送
+          address: 119.91.66.223:9091 # 推送地址
+          push-interval: 3000 # 推送间隔，单位ms
+        push-gateway-enabled: true
+        push-gateway-address: 8.134.88.54:9091
+        push-gateway-push-interval: 3000
+    tencent:
+      # 开启路由监控
+      rpc-enhancement:
+        enabled: true
+        reporter:
+          enabled: true
+#      config:
+#        address: grpc://${独立的配置中心}:8093 # 选填，只有在配置中心和注册中心是两个不同的地址时才需要配置
+#        auto-refresh: true # 选填，当配置发布后，动态刷新 Spring 上下文，默认值为 true

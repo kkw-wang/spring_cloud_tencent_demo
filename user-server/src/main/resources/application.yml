@@ -1,0 +1,19 @@
+server:
+  port: 9001
+# 应用名称
+spring:
+  config:
+    import: polaris
+  cloud:
+    polaris:
+      stat:
+        pushgateway:
+          enabled: true # 开启监控数据推送
+          address: 8.134.88.54:9091 # 推送地址
+          push-interval: 3000 # 推送间隔，单位ms
+    openfeign:
+      compression:
+        request:
+          enabled: true
+          min-request-size: 10
+  

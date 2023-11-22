@@ -1,0 +1,31 @@
+server:
+  port: 9999
+# 应用名称
+spring:
+  config:
+    import: polaris
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          # 开启从注册中心动态创建路由的功能，利用微服务名进行路由
+          enabled: true
+      routes:
+        # 路由ID,唯一即可，一般建议服务名
+        - id: user-server
+          # 如果不单独使用注册中心的话，uri可以用具体的ip地址，比如uri:http://localhost:8081,http://localhost8082
+          uri: lb://user-server
+          # 路径断言：当请求url以/user-server开头的转发到这个路由的服务地址上
+          predicates:
+            - Path=/user-server/**
+          filters:
+            # 去除一级的前缀
+            - StripPrefix=1
+        - id: order-server
+          uri: lb://order-server
+          predicates:
+            - Path=/order-server/**
+          filters:
+            # 去除一级的前缀
+            - StripPrefix=1
+  
